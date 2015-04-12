@@ -1,0 +1,138 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Threading;
+
+namespace Magic8Ball
+{
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            //Preserve current console Text Color
+            ConsoleColor oldColor = Console.ForegroundColor;
+
+            TellPeopleProgramName();
+
+            //create randomiser object
+            Random randomObject = new Random();
+
+            while(true)
+            {
+                string questionString = GetQuestion();
+
+                int numOfSeconds = randomObject.Next(5)+1;
+                Console.WriteLine("Thinking...Please stand by.");
+                Thread.Sleep(numOfSeconds * 1000);
+
+                //See if question is even being asked
+                if (questionString.Length == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("Enter a Question fool");
+                    continue;
+                }
+
+                //see if user typed quit
+                if(questionString.ToLower() == "quit")
+                {
+                    break;
+                }
+
+                if(questionString.ToLower() == "you suck")
+                {
+                    Console.WriteLine("YOU SUCK MORE!!!! KTHXBYE");
+                    break;
+                }
+
+
+                //get random number
+                int randNum = randomObject.Next(8);
+
+
+                //use random number to determine answer
+                switch(randNum)
+                {
+                    case 0:
+                        {
+                            Console.WriteLine("YES!!!!");
+                            Console.WriteLine();
+                            break;
+                        }
+                    case 1:
+                        {
+                            Console.WriteLine("NO!!!!!!");
+                            Console.WriteLine();
+                            break;
+                        }
+                    case 2:
+                        {
+                            Console.WriteLine("MAYBE????");
+                            Console.WriteLine();
+                            break;
+                        }
+                    case 3:
+                        {
+                            Console.WriteLine("I DON'T KNOW!");
+                            Console.WriteLine();
+                            break;
+                        }
+                    case 4:
+                        {
+                            Console.WriteLine("Hell NO");
+                            Console.WriteLine();
+                            break;
+                        }
+                    case 5:
+                        {
+                            Console.WriteLine("Bitch Please!");
+                            Console.WriteLine();
+                            break;
+                        }
+                    case 6:
+                        {
+                            Console.WriteLine("You should probably consider jumping off the nearest bridge");
+                            Console.WriteLine();
+                            break;
+                        }
+                    case 7:
+                        {
+                            Console.WriteLine("You must really think with sunshine and rainbows....");
+                            Console.WriteLine();
+                            break;
+                        }
+
+                } //end of while loop
+            }
+
+
+            //cleaning up
+            Console.ForegroundColor = oldColor;
+        }
+
+        // Tells people name of program and who created it. 
+        static void TellPeopleProgramName()
+        {
+            //Change Console Text Color
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("Magic 8 ball, by Blake");
+        }
+
+
+        //This function returns the text the user types
+        static string GetQuestion()
+        {
+            //This block asks a user for a question and stores question in questionString
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.Write("Ask a Question!:  ");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            string questionString = Console.ReadLine();
+
+            return questionString;
+        }
+    }
+}
